@@ -1,35 +1,65 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="min-h-screen bg-soft-white p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="bg-red text-white p-4 rounded">
+        <p className="font-sans font-semibold">Red</p>
+        <p className="font-poppins text-sm">Poppins sample</p>
+        <p className="font-ibm text-sm">IBM Plex sample</p>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+
+      <div className="bg-green text-white p-4 rounded">
+        <p className="font-sans font-semibold">Green</p>
+        <p className="font-poppins text-sm">Poppins sample</p>
+        <p className="font-ibm text-sm">IBM Plex sample</p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+      <div className="bg-dark-blue text-white p-4 rounded">
+        <p className="font-sans font-semibold">Dark Blue</p>
+        <p className="font-poppins text-sm">Poppins sample</p>
+        <p className="font-ibm text-sm">IBM Plex sample</p>
+      </div>
+
+      <div className="bg-blue text-white p-4 rounded">
+        <p className="font-sans font-semibold">Blue</p>
+        <p className="font-poppins text-sm">Poppins sample</p>
+        <p className="font-ibm text-sm">IBM Plex sample</p>
+      </div>
+
+      <div className="bg-sober-blue text-white p-4 rounded">
+        <p className="font-sans font-semibold">Sober Blue</p>
+        <p className="font-poppins text-sm">Poppins sample</p>
+        <p className="font-ibm text-sm">IBM Plex sample</p>
+      </div>
+
+      <div className="bg-gray text-dark-blue p-4 rounded">
+        <p className="font-sans font-semibold">Gray</p>
+        <p className="font-poppins text-sm">Poppins sample</p>
+        <p className="font-ibm text-sm">IBM Plex sample</p>
+      </div>
+
+      <div className="bg-soft-white text-dark-blue p-4 rounded">
+        <p className="font-sans font-semibold">Soft White</p>
+        <p className="font-poppins text-sm">Poppins sample</p>
+        <p className="font-ibm text-sm">IBM Plex sample</p>
+      </div>
+
+      <div className="bg-gray-dark text-white p-4 rounded">
+        <p className="font-sans font-semibold">Gray Dark</p>
+        <p className="font-poppins text-sm">Poppins sample</p>
+        <p className="font-ibm text-sm">IBM Plex sample</p>
+      </div>
+
+      <div className="bg-white text-dark-blue p-4 rounded border border-gray-dark">
+        <p className="font-sans font-semibold">White</p>
+        <p className="font-poppins text-sm">Poppins sample</p>
+        <p className="font-ibm text-sm">IBM Plex sample</p>
+      </div>
+
+      <div className="bg-black text-white p-4 rounded">
+        <p className="font-sans font-semibold">Black</p>
+        <p className="font-poppins text-sm">Poppins sample</p>
+        <p className="font-ibm text-sm">IBM Plex sample</p>
+      </div>
+    </div>
   )
 }
-
-export default App
