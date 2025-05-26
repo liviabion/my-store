@@ -4,7 +4,7 @@ import { type CartItem, type CartAction } from "../types/Cart"
 interface CartState {
   cart: CartItem[]
 }
-
+  
 interface CartContextType extends CartState {
   dispatch: React.Dispatch<CartAction>
 }
