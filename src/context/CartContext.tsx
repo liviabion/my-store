@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, ReactNode } from "react"
+import { createContext, useContext, useReducer, useEffect, ReactNode } from "react"
 import { type CartItem, type CartAction } from "../types/Cart"
 
 interface CartState {
@@ -68,8 +68,25 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
   }
 }
 
+// Carrega o carrinho do localStorage, se existir
+const loadCartFromStorage = (): CartItem[] => {
+  try {
+    const saved = localStorage.getItem("cart")
+    return saved ? JSON.parse(saved) : []
+  } catch {
+    return []
+  }
+}
+
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [state, dispatch] = useReducer(cartReducer, { cart: [] })
+  const [state, dispatch] = useReducer(cartReducer, {
+    cart: loadCartFromStorage(),
+  })
+
+  // Salva o carrinho no localStorage sempre que mudar
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(state.cart))
+  }, [state.cart])
 
   return (
     <CartContext.Provider value={{ cart: state.cart, dispatch }}>
