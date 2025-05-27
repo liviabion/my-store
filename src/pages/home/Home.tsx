@@ -28,7 +28,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen pt-24">
       <Header />
 
-      <main className="flex-1 px-6 bg-sober-blue/10 pb-10">
+      <main className="flex-1 px-6 bg-sober-blue/10 pb-10 pt-10">
         <h1 className="text-2xl font-bold text-dark-blue mb-6 text-center">Explore os produtos</h1>
 
         <div className="mb-6 flex gap-3 flex-wrap justify-center">
