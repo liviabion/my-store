@@ -4,9 +4,10 @@ import { type CartItem, type CartAction } from "../types/Cart"
 interface CartState {
   cart: CartItem[]
 }
-  
+
 interface CartContextType extends CartState {
   dispatch: React.Dispatch<CartAction>
+  finalizePurchase: () => boolean
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
@@ -68,7 +69,6 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
   }
 }
 
-// Carrega o carrinho do localStorage, se existir
 const loadCartFromStorage = (): CartItem[] => {
   try {
     const saved = localStorage.getItem("cart")
@@ -83,13 +83,48 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     cart: loadCartFromStorage(),
   })
 
-  // Salva o carrinho no localStorage sempre que mudar
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(state.cart))
   }, [state.cart])
 
+  const finalizePurchase = (): boolean => {
+    const cartItems = state.cart
+    const stock = JSON.parse(localStorage.getItem("stock") || "{}")
+    const updatedStock = { ...stock }
+
+    const hasOutOfStock = cartItems.some((item) => {
+      const currentStock = updatedStock[item.id] ?? item.stock
+      return item.quantity > currentStock
+    })
+
+    if (hasOutOfStock) {
+      alert("Um ou mais itens estão fora de estoque.")
+      return false
+    }
+
+    // Atualiza o estoque no localStorage
+    cartItems.forEach((item) => {
+      const currentStock = updatedStock[item.id] ?? item.stock
+      updatedStock[item.id] = currentStock - item.quantity
+    })
+    localStorage.setItem("stock", JSON.stringify(updatedStock))
+
+    // Salvar pedido em "my-store-orders"
+    const previousOrders = JSON.parse(localStorage.getItem("my-store-orders") || "[]")
+    const newOrder = {
+      id: crypto.randomUUID(),
+      date: new Date().toLocaleString(),
+      total: cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
+      items: cartItems,
+    }
+    localStorage.setItem("my-store-orders", JSON.stringify([...previousOrders, newOrder]))
+
+    dispatch({ type: "CLEAR_CART" })
+    return true
+  }
+
   return (
-    <CartContext.Provider value={{ cart: state.cart, dispatch }}>
+    <CartContext.Provider value={{ cart: state.cart, dispatch, finalizePurchase }}>
       {children}
     </CartContext.Provider>
   )
