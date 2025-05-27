@@ -9,5 +9,5 @@ export interface HeaderProps {
   logoWidth?: string
   logoHeight?: string
   linksLeft?: NavLink[]
-  linkRight?: NavLink
+  linkRight?: NavLink[]
 }

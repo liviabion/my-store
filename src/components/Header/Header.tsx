@@ -14,7 +14,10 @@ const Header = ({
     { label: "Início", to: "/", icon: <HomeIcon fontSize="small" /> },
     { label: "Conheça a My Store", to: "/sobre", icon: <InfoIcon fontSize="small" /> }
   ],
-  linkRight = { label: "Seu carrinho", to: "/carrinho", icon: <ShoppingCartIcon fontSize="small" /> }
+  linkRight = [
+    { label: "Seus pedidos", to: "/pedidos", icon: <ShoppingCartIcon fontSize="small" /> },
+    { label: "Seu carrinho", to: "/carrinho", icon: <ShoppingCartIcon fontSize="small" /> }
+  ]
 }: HeaderProps) => {
   return (
     <header className={`fixed top-0 left-0 w-full z-50 bg-blue shadow-md ${className}`}>
@@ -42,16 +45,19 @@ const Header = ({
           </nav>
         </div>
 
-        {/* Lado direito: carrinho */}
-        {linkRight && (
-          <Link
-            to={linkRight.to}
-            className="flex items-center gap-2 text-soft-white hover:text-white transition"
-          >
-            {linkRight.icon}
-            <span className="text-sm font-medium">{linkRight.label}</span>
-          </Link>
-        )}
+        {/* Lado direito: links */}
+        <nav className="flex items-center gap-6">
+          {linkRight.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              className="flex items-center gap-2 text-soft-white hover:text-white transition"
+            >
+              {link.icon}
+              <span className="text-sm font-medium">{link.label}</span>
+            </Link>
+          ))}
+        </nav>
       </div>
     </header>
   )
