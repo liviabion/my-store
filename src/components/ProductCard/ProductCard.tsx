@@ -32,12 +32,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
       <div
         className={`text-xs font-semibold mb-3 ${
-          isOutOfStock ? "text-red" : "text-green-muted"
+          isOutOfStock ? "text-red-500" : "text-green-600"
         }`}
       >
         {isOutOfStock
           ? "Produto indisponível"
-          : `Disponível: ${product.stock} unidade(s)`}
+          : `Em estoque: ${product.stock} unidade(s)`}
       </div>
 
       <Link
